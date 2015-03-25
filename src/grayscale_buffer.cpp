@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -78,7 +78,7 @@ GrayscaleBuffer::clear(Uint8 c)
 {
   memset(buffer, c, width*height);
 }
-  
+
 void
 GrayscaleBuffer::fill_rect(const Rect& rect_, Uint8 c)
 {
@@ -112,27 +112,27 @@ GrayscaleBuffer::blit(GrayscaleBuffer* source, int of_x, int of_y, Uint8 alpha, 
   // insert blitter here
 
   switch(mode)
-    { 
+    {
     case OPAQUE:
       for(int y = start_y; y < end_y ; ++y)
         for(int x = start_x; x < end_x ; ++x)
           {
             Uint8& f = buffer[y * width + x];
             Uint8& p = source->buffer[(y - of_y) * source->width + (x - of_x)];
-          
+
             f = p;
           }
       break;
-  
+
     case ADDITION:
       for(int y = start_y; y < end_y ; ++y)
         for(int x = start_x; x < end_x ; ++x)
           {
             Uint8& f = buffer[y * width + x];
             Uint8& p = source->buffer[(y - of_y) * source->width + (x - of_x)];
-          
+
             f = std::max(std::min(f + p, 255), 0);
-          }      
+          }
       break;
 
     case SUBTRACT:
@@ -141,9 +141,9 @@ GrayscaleBuffer::blit(GrayscaleBuffer* source, int of_x, int of_y, Uint8 alpha, 
           {
             Uint8& f = buffer[y * width + x];
             Uint8& p = source->buffer[(y - of_y) * source->width + (x - of_x)];
-          
+
             f = std::max(f - p, 0);
-          }      
+          }
       break;
 
     case ALPHA:
@@ -152,17 +152,17 @@ GrayscaleBuffer::blit(GrayscaleBuffer* source, int of_x, int of_y, Uint8 alpha, 
           {
             Uint8& f = buffer[y * width + x];
             Uint8& p = source->buffer[(y - of_y) * source->width + (x - of_x)];
-            
+
             // Works, but not exactly alpha
             f = std::max(std::min(f + (alpha * p/255)/4, 255), 0);
             //f = alpha;
 
-            //f = (((255 - p) * f) + (p * p))/255; 
-            
+            //f = (((255 - p) * f) + (p * p))/255;
+
             // Speed worm: f = ((p)*p + p*f)/255;
-          }      
+          }
       break;
-      
+
     default:
       assert(!"Unknown blend mode");
     }
@@ -223,13 +223,13 @@ int main()
 
   print(target);
   print(source);
-  
+
   target.blit(&source, -3, -3, GrayscaleBuffer::ADDITION);
   target.blit(&source, 5, 4, GrayscaleBuffer::ADDITION);
   target.blit(&source, 7, 5, GrayscaleBuffer::SUBTRACT);
 
   print(target);
- 
+
 }
 
 #endif

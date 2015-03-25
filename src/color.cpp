@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -31,7 +31,7 @@ HSVColor
 HSVColor::from_rgb(const Color& color)
 { // untested
   HSVColor hsvcolor;
-    
+
   Uint8 min = std::min(std::min(color.r, color.g), color.b);
   Uint8 max = std::max(std::max(color.r, color.g), color.b);
 
@@ -74,8 +74,8 @@ Color::from_hsv(Uint8 hue, Uint8 saturation, Uint8 value)
   color.apply_value_saturation(value, saturation);
   return color;
 }
-  
-  
+
+
 
 Color
 Color::from_hue(Uint8 hue)
@@ -87,7 +87,7 @@ Color::from_hue(Uint8 hue)
                             Color(  0, 255,   0),
                             Color(255, 255,   0),
                             Color(255,   0,   0) };
-  
+
   int seg_len = (255/6);
   int seg  = (hue / seg_len);
   int prog = (hue % seg_len);
@@ -108,7 +108,7 @@ Color::apply_value_saturation(Uint8 value, Uint8 saturation)
 std::ostream& operator<<(std::ostream& s, const Color& color)
 {
   return (s << "RGBA("
-          << int(color.r) << ", " << int(color.g) << ", " << int(color.b) << ", " << int(color.a) 
+          << int(color.r) << ", " << int(color.g) << ", " << int(color.b) << ", " << int(color.a)
           << ")");
 }
 

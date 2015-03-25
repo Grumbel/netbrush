@@ -132,7 +132,7 @@ public:
 	bool is_inside(const Point &p) const { return (p.x >= left && p.y >= top && p.x <= right && p.y <= bottom); }
 
 	//: Returns true if rectangle passed is overlapping or inside this rectangle.
-	bool is_overlapped(const Rect &r) const 
+	bool is_overlapped(const Rect &r) const
 	{
 		return (r.left < right && r.right > left && r.top < bottom && r.bottom > top);
 	}
@@ -215,9 +215,9 @@ public:
 	Rectf() { left = right = top = bottom = 0.0f; }
 
 	Rectf(const Rect& rect)
-		: left((float)rect.left), 
-		  top((float)rect.top), 
-		  right((float)rect.right), 
+		: left((float)rect.left),
+		  top((float)rect.top),
+		  right((float)rect.right),
 		  bottom((float)rect.bottom)
 	{}
 
@@ -297,7 +297,7 @@ public:
 	bool is_inside(const Vector &p) const { return (p.x >= left && p.y >= top && p.x <= right && p.y <= bottom); }
 	
 	//: Returns true if rectangle passed is overlapping or inside this rectangle.
-	bool is_overlapped(const Rectf &r) const 
+	bool is_overlapped(const Rectf &r) const
 	{
 		return (r.left < right && r.right > left && r.top < bottom && r.bottom > top);
 	}
@@ -357,7 +357,7 @@ public:
 
 	// Moves each edge f away from the center, thus width = old_width + 2*f
 	Rectf grow(float f) const {
-		return Rectf(left   - f, 
+		return Rectf(left   - f,
 						 top    - f,
 						 right  + f,
 						 bottom + f);
@@ -365,9 +365,9 @@ public:
 };
 
 inline Rect::Rect(const Rectf& rect)
-	: left(static_cast<int>(rect.left)), 
-	  top(static_cast<int>(rect.top)), 
-	  right(static_cast<int>(rect.right)), 
+	: left(static_cast<int>(rect.left)),
+	  top(static_cast<int>(rect.top)),
+	  right(static_cast<int>(rect.right)),
 	  bottom(static_cast<int>(rect.bottom))
 {}
 

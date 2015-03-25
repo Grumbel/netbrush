@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -32,7 +32,7 @@ HuePicker::HuePicker(const Rect& rect_)
   : Widget(rect_), dragging(0)
 {
   surface = create_surface(rect_.get_width(), rect_.get_height());
-  
+
   SDL_LockSurface(surface);
   Uint8* data = static_cast<Uint8*>(surface->pixels);
 
@@ -40,13 +40,13 @@ HuePicker::HuePicker(const Rect& rect_)
     for(int x = 0; x < surface->w; ++x)
       {
         int hue = 255 * x / surface->w;
-        
+
         const Color& color = Color::from_hue(hue);
         data[3*(y * surface->w + x)+0] = color.r;
         data[3*(y * surface->w + x)+1] = color.g;
         data[3*(y * surface->w + x)+2] = color.b;
       }
-  SDL_UnlockSurface(surface);  
+  SDL_UnlockSurface(surface);
 }
 
 void

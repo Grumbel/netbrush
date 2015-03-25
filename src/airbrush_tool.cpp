@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -49,8 +49,8 @@ AirbrushTool::on_motion(const ToolMotionEvent& ev)
       stroke_buffer->add_dab(Dab(ev.x, ev.y));
 
       // sync
-      Rect rect = current_stroke->get_bounding_rect(); 
-              
+      Rect rect = current_stroke->get_bounding_rect();
+
       // calculate bounding rectangle by taking brush thickness into account
       // FIXME: Handle x/y thickness independetly to get a smaller clip rect
       rect.left -= client_draw_param->thickness()/2;
@@ -58,7 +58,7 @@ AirbrushTool::on_motion(const ToolMotionEvent& ev)
 
       rect.right  += client_draw_param->thickness()/2;
       rect.bottom += client_draw_param->thickness()/2;
-                  
+
       screen_buffer->mark_dirty(rect);
     }
 }
@@ -76,7 +76,7 @@ AirbrushTool::on_pen_motion(const PenEvent& pen)
         {
           current_stroke = new Stroke();
           pen_active = true;
-        }      
+        }
 
       float x = pen.x;
       float y = pen.y;
@@ -85,8 +85,8 @@ AirbrushTool::on_pen_motion(const PenEvent& pen)
       stroke_buffer->add_dab(Dab(x, y, pen.pressure));
 
       // sync
-      Rect rect = current_stroke->get_bounding_rect(); 
-              
+      Rect rect = current_stroke->get_bounding_rect();
+
       // calculate bounding rectangle by taking brush thickness into account
       // FIXME: Handle x/y thickness independetly to get a smaller clip rect
       rect.left -= client_draw_param->thickness()/2;
@@ -94,7 +94,7 @@ AirbrushTool::on_pen_motion(const PenEvent& pen)
 
       rect.right  += client_draw_param->thickness()/2;
       rect.bottom += client_draw_param->thickness()/2;
-                  
+
       screen_buffer->mark_dirty(rect);
     }
   else if (current_stroke)

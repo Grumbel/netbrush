@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -29,7 +29,7 @@ BrushWidget::BrushWidget(const Rect& rect_)
   : Widget(rect_)
 {
   surface = create_surface(rect_.get_width(), rect_.get_height());
-  
+
 }
 
 BrushWidget::~BrushWidget()
@@ -54,7 +54,7 @@ BrushWidget::draw(GraphicContext& gc)
   gc.blit(surface, Point(0,0));
 }
 
-void 
+void
 BrushWidget::set_brush(GrayscaleBuffer* brushmask)
 {
   SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 255, 255, 255));
@@ -63,7 +63,7 @@ BrushWidget::set_brush(GrayscaleBuffer* brushmask)
 
   int x_of = std::max(0, (surface->w - brushmask->get_width())/2);
   int y_of = std::max(0, (surface->h - brushmask->get_height())/2);
-  
+
   for(int y = 0; y < std::min(brushmask->get_height(), surface->h); ++y)
     for(int x = 0; x < std::min(brushmask->get_width(), surface->w); ++x)
       {
@@ -87,8 +87,8 @@ BrushWidget::set_brush(GrayscaleBuffer* brushmask)
             data[3*((y+y_of) * surface->w + (x+x_of))+2] = c;
           }
       }
-      
-  SDL_UnlockSurface(surface); 
+
+  SDL_UnlockSurface(surface);
   set_dirty(true);
 }
 

@@ -1,5 +1,5 @@
 //  $Id$
-// 
+//
 //  Flexlay - A Generic 2D Game Editor
 //  Copyright (C) 2002 Ingo Ruhnke <grumbel@gmx.de>
 //
@@ -7,12 +7,12 @@
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
-//  
+//
 //  This program is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -62,7 +62,7 @@ public:
       position even after zoomed in/out */
   void  set_zoom(Vector pos, float z);
   void  set_zoom(float z);
-  float get_zoom(); 
+  float get_zoom();
 
   void zoom_to (const Rectf& rect);
 

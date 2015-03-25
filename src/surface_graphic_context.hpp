@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -43,17 +43,17 @@ private:
 public:
   SurfaceGraphicContext(SDL_Surface* surface, const Rect& region);
   ~SurfaceGraphicContext();
-  
+
   void set_anti_aliasing(bool t);
 
   void fill_rect(const Rect& rect, const Color& color);
   void draw_rect(const Rect& rect, const Color& color);
-  
+
   void fill_circle(const Point& pos, int radius, const Color& color);
   void draw_circle(const Point& pos, int radius, const Color& color);
 
   void draw_line(const Point& p1, const Point& p2, const Color& color);
-  
+
   void blit(SDL_Surface* source, const Point& pos);
   void blit(SDL_Surface* source, const Rect& src_rect, const Point& pos);
 

@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -29,13 +29,13 @@
 #include "navigation.hpp"
 #include "drawing_context.hpp"
 
-DrawingContext::DrawingContext(int w, int h) 
+DrawingContext::DrawingContext(int w, int h)
 {
   drawable = create_surface(w, h);
   stroke_buffer = new StrokeBuffer(w, h);
 }
 
-DrawingContext::~DrawingContext() 
+DrawingContext::~DrawingContext()
 {
   SDL_FreeSurface(drawable);
 }
@@ -47,7 +47,7 @@ DrawingContext::draw_stroke(const Stroke& stroke, DrawingParameter* param)
 
   rect.left -= param->thickness()/2;
   rect.top  -= param->thickness()/2;
-  
+
   rect.right  += param->thickness()/2;
   rect.bottom += param->thickness()/2;
 
@@ -68,7 +68,7 @@ void
 DrawingContext::clear()
 {
   SDL_Rect rect;
-  
+
   rect.x = 0;
   rect.y = 0;
   rect.w = drawable->w;
@@ -148,7 +148,7 @@ DrawingContext::get_color(int x, int y, Color& color)
                  &color.g,
                  &color.b);
 
-  
+
       SDL_UnlockSurface(drawable);
       return true;
     }
@@ -181,11 +181,11 @@ DrawingContext::save_png(const std::string& filename)
 
   png_init_io(png_ptr, fp);
 
-  png_set_IHDR(png_ptr, info_ptr, 
+  png_set_IHDR(png_ptr, info_ptr,
                drawable->w, drawable->h, 8 /* bitdepth */,
                PNG_COLOR_TYPE_RGB,
-               PNG_INTERLACE_NONE, 
-               PNG_COMPRESSION_TYPE_BASE, 
+               PNG_INTERLACE_NONE,
+               PNG_COMPRESSION_TYPE_BASE,
                PNG_FILTER_TYPE_BASE);
 
   png_write_info(png_ptr, info_ptr);
@@ -221,7 +221,7 @@ DrawingContext::get_surface(const Rect& rect)
   SDL_Surface* region = create_surface(rect.get_width(), rect.get_height());
   // Fill with white (FIXME: should be alpha or background color)
   SDL_FillRect(region, NULL, SDL_MapRGB(region->format, 255, 255, 255));
-  
+
   SDL_Rect source_pos;
   // FIXME: Do we need to clip those?
   source_pos.x = rect.left;
@@ -233,7 +233,7 @@ DrawingContext::get_surface(const Rect& rect)
   target_pos.x = 0;
   target_pos.y = 0;
 
-  SDL_BlitSurface(drawable, &source_pos, region, &target_pos);  
+  SDL_BlitSurface(drawable, &source_pos, region, &target_pos);
 
   return region;
 }

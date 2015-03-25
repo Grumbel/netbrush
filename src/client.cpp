@@ -52,7 +52,7 @@ SDL_Rect* make_rect(int x, int y, int w, int h)
 void process_events()
 {
   SDL_Event event;
-  
+
   while(SDL_PollEvent(&event))
     {
       switch(event.type)
@@ -115,7 +115,7 @@ void process_events()
               int j = 1;
               std::string fname;
               std::ostringstream filename;
-              do 
+              do
                 {
                   filename.str("");
                   filename << "images/canvas-" << j << ".png";
@@ -123,7 +123,7 @@ void process_events()
                   j += 1;
               }
               while (access(fname.c_str(), F_OK) == 0);
-              
+
               controller->save_png(fname);
 
             }
@@ -156,17 +156,17 @@ void process_events()
           if (xinput)
             {
               syswm.info.x11.lock_func();
-              xinput->on_xevent(syswm.info.x11.display, syswm.info.x11.window, 
+              xinput->on_xevent(syswm.info.x11.display, syswm.info.x11.window,
                                 event.syswm.msg->event.xevent);
               syswm.info.x11.unlock_func();
             }
           break;
 
-        default: 
+        default:
           std::cout << "Unhandled SDL event: " << int(event.type) << std::endl;
           break;
         }
-    }  
+    }
 }
 
 int main(int argc, char** argv)
@@ -287,7 +287,7 @@ int main(int argc, char** argv)
     Uint32 flags = SDL_HWSURFACE;
     if (fullscreen)
       flags |= SDL_FULLSCREEN;
-    screen = SDL_SetVideoMode(screen_width, screen_height, 32, flags); 
+    screen = SDL_SetVideoMode(screen_width, screen_height, 32, flags);
     if (screen == 0)
       printf("SDL_SetVideoMode: %s\n", SDL_GetError());
     SDL_WM_SetCaption("netBrush", "netBrush");
@@ -308,10 +308,10 @@ int main(int argc, char** argv)
       }
 
     // 18 is scrollbar
-    screen_buffer = new ScreenBuffer(Rect(38, 2, screen->w - 128 - 18 - 2 - 2, screen->h - 16 - 4 - 38)); 
+    screen_buffer = new ScreenBuffer(Rect(38, 2, screen->w - 128 - 18 - 2 - 2, screen->h - 16 - 4 - 38));
     draw_ctx      = new DrawingContext(canvas_width, canvas_height);
     stroke_buffer = new StrokeBuffer(canvas_width, canvas_height);
-    
+
     //std::cout << "# clear screen" << std::endl;
 
     // clear screen
@@ -321,7 +321,7 @@ int main(int argc, char** argv)
 
     client_draw_param = new DrawingParameter();
     stroke_buffer->set_param(client_draw_param);
-  
+
     server = new ServerConnection();
     if (!hostname.empty() && !port.empty())
       {
@@ -336,7 +336,7 @@ int main(int argc, char** argv)
         std::cout << "# use '" << argv[0] << " HOSTNAME PORT' to connect a networking session" << std::endl;
         SDL_WM_SetCaption("netBrush - offline mode", "netBrush");
       }
-  
+
     widget_manager = new WidgetManager();
     controller     = new Controller();
 
@@ -355,12 +355,12 @@ int main(int argc, char** argv)
 
     widget_manager->add(screen_buffer);
 
-    widget_manager->add(vertical_scrollbar = 
+    widget_manager->add(vertical_scrollbar =
                         new Scrollbar(0, canvas_height, screen_buffer->get_rect().get_height(), Scrollbar::VERTICAL,
                                       Rect(screen->w - 128 - 16 - 2 - 2, 2,
                                            screen->w - 128 - 2 - 2, screen->h - 16 - 4 - 38)));
 
-    widget_manager->add(horizontal_scrollbar = 
+    widget_manager->add(horizontal_scrollbar =
                         new Scrollbar(0, canvas_width, screen_buffer->get_rect().get_width(), Scrollbar::HORIZONTAL,
                                       Rect(38, screen->h - 16 - 2 - 38,
                                            screen->w - 128 - 18 - 2 - 2, screen->h - 2 - 38)));
@@ -376,7 +376,7 @@ int main(int argc, char** argv)
   } catch(std::exception& err) {
     std::cout << "Exception: " << err.what() << std::endl;
   }
-  
+
   return 0;
 }
 

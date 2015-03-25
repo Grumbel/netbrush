@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -65,12 +65,12 @@ void accept_connections()
             std::cout << "# Got client connection from " << host << " " << ip->port << std::endl;
           else
             std::cout << "# Got client connection from " << ip->host << " " << ip->port << std::endl;
-          
+
           int numused = SDLNet_TCP_AddSocket(socketset, client);
           if (numused == -1) {
             printf("SDLNet_AddSocket: %s\n", SDLNet_GetError());
             // perhaps you need to restart the set and make it bigger...
-          } 
+          }
           else
             {
               std::cout << "# Sockets used: " << numused << std::endl;
@@ -82,7 +82,7 @@ void accept_connections()
 void connect(Uint16 port)
 {
   IPaddress ip;
-  
+
   if(SDLNet_ResolveHost(&ip,NULL,port)==-1) {
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     exit(1);
@@ -111,9 +111,9 @@ void connect(Uint16 port)
           perror("SDLNet_CheckSockets");
         }
       else
-        { 
+        {
           accept_connections();
-       
+
           for(int i = 0; i < int(clients.size()); ++i)
             {
               if (clients[i])
@@ -125,7 +125,7 @@ void connect(Uint16 port)
               if (clients[i] && clients[i]->is_invalid())
                 {
                   std::cout << "# client " << clients[i]->id << " got disconnected" << std::endl;
-                  SDLNet_TCP_DelSocket(socketset, clients[i]->tcpsock); 
+                  SDLNet_TCP_DelSocket(socketset, clients[i]->tcpsock);
                   SDLNet_TCP_Close(clients[i]->tcpsock);
                   delete clients[i];
                   clients[i] = 0;
@@ -155,12 +155,12 @@ int main(int argc, char** argv)
             argp.print_help();
             return 0;
             break;
-            
+
           case 'v':
             std::cout << "netBrush Server 0.1.0" << std::endl;
             return 0;
             break;
-            
+
           case CommandLine::REST_ARG:
             if (!port.empty())
               {

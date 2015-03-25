@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -65,14 +65,14 @@ tokenize(const std::string& str, char split_char)
 }
 
 ClientConnection::ClientConnection(int id_, TCPsocket socket)
-  : id(id_), 
+  : id(id_),
     tcpsock(socket),
     invalid(false)
 {
   buffer_pos = 0;
   full_client = false;
 }
-  
+
 bool
 ClientConnection::is_invalid()
 {
@@ -90,14 +90,14 @@ ClientConnection::update()
       char msg[MAXLEN];
 
       int result = SDLNet_TCP_Recv(tcpsock, msg, MAXLEN);
-      if(result <= 0) 
+      if(result <= 0)
         {
           // TCP Connection is broken. (because of error or closure)
           std::cout << "# Connection break, abort" << std::endl;
           invalid = true;
           return;
         }
-      else 
+      else
         {
           for(int i = 0; i < result; ++i)
             {
@@ -122,7 +122,7 @@ ClientConnection::send_string(const std::string& line)
   if (full_client)
     {
       if (invalid) return;
-        
+
       //std::cout << "Sending: '" << line << "' ... " << std::flush;
       int result = SDLNet_TCP_Send(tcpsock, const_cast<char*>(line.c_str()), line.length());
       if (result < int(line.length()))
@@ -139,7 +139,7 @@ void
 ClientConnection::process_line(const std::string& line)
 {
   if (invalid) return;
-    
+
   std::vector<std::string> tokens = tokenize(line, ' ');
   if (tokens.size() == 2 && tokens[0] == "load")
     {
@@ -165,9 +165,9 @@ ClientConnection::process_line(const std::string& line)
               tokens[1][i] = '.';
             }
         }
-        
+
       std::ostringstream filename;
-      filename << "images/" << tokens[1] << ".nbr";        
+      filename << "images/" << tokens[1] << ".nbr";
 
       int j = 1;
       std::string fname = filename.str();
@@ -200,7 +200,7 @@ ClientConnection::process_line(const std::string& line)
     {
       std::ostringstream filename;
       filename << "sessions/session-" << time(NULL) << ".nbr";
-        
+
       std::cout << "# writing log to " << filename.str() << std::endl;
       outfile->close();
       delete outfile;
@@ -216,7 +216,7 @@ ClientConnection::process_line(const std::string& line)
             }
         }
     }
-  else if (tokens.size() >= 1 && 
+  else if (tokens.size() >= 1 &&
            (tokens[0] == "dab" ||
             tokens[0] == "stroke_begin" ||
             tokens[0] == "message"      ||
@@ -229,7 +229,7 @@ ClientConnection::process_line(const std::string& line)
             tokens[0] == "fill_rect"    ||
             tokens[0] == "fill_circle"  ||
             tokens[0] == "draw_line"    ||
-            tokens[0] == "set_opacity" 
+            tokens[0] == "set_opacity"
             ))
     {
       std::ostringstream str;

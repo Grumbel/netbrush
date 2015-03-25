@@ -86,7 +86,7 @@ float Matrix::get_origin_z() const
 /////////////////////////////////////////////////////////////////////////////
 // Matrix operations:
 
-bool Matrix::operator==(const Matrix &other) const 
+bool Matrix::operator==(const Matrix &other) const
 {
 	for (int i=0; i<16; i++)
 		if (matrix[i] != other.matrix[i]) return false;

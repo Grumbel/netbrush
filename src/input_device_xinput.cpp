@@ -9,12 +9,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -97,7 +97,7 @@ InputDevice_XInput::get_info(XDeviceInfo* info)
   if (info->num_classes > 0)
     {
       XAnyClassPtr any = (XAnyClassPtr) (info->inputclassinfo);
-      for (int i = 0; i < info->num_classes; ++i) 
+      for (int i = 0; i < info->num_classes; ++i)
         {
           switch (any->c_class) {
           case KeyClass:
@@ -332,7 +332,7 @@ InputDevice_XInput::on_device_motion_event(Display* dpy, Window w, XDeviceMotion
   float x_tilt;
   float y_tilt;
 
-  for(int i = 0; i<motion->axes_count; ++i) 
+  for(int i = 0; i<motion->axes_count; ++i)
     {
       if (i == 0)
         {
@@ -371,9 +371,9 @@ InputDevice_XInput::on_device_motion_event(Display* dpy, Window w, XDeviceMotion
     }
   if (verbose) printf("\n");
 
-  if (0) 
+  if (0)
     printf("x: %1.5f y: %1.5f pressure: %1.5f x_tilt: %2.5f y_tilt: %2.5f\n", x, y, pressure, x_tilt, y_tilt);
-  
+
   // Translate tablet coordinates into window coordinates
   Window child_return;
   int x_origin, y_origin;
@@ -384,7 +384,7 @@ InputDevice_XInput::on_device_motion_event(Display* dpy, Window w, XDeviceMotion
 
   widget_manager->on_pen_motion(PenEvent(x * display_width  - x_origin,
                                          y * display_height - y_origin,
-                                         pressure, 
+                                         pressure,
                                          x_tilt, y_tilt));
 }
 
@@ -395,7 +395,7 @@ InputDevice_XInput::on_proximity_notify_event(XProximityNotifyEvent* prox)
 		
   if (prox->type == proximity_in_type)
     proximity = true;
-  else 
+  else
     proximity = false;
 
   for(int i = 0; i < prox->axes_count; ++i)

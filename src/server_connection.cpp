@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -76,7 +76,7 @@ ServerConnection::send(const std::string& str)
         {
           printf( "SDLNet_TCP_Send: %s\n", SDLNet_GetError() );
           // It may be good to disconnect sock because it is likely invalid now.
-        }     
+        }
     }
   else
     { // Not connected, so directly procses the command without a
@@ -92,7 +92,7 @@ ServerConnection::send(const std::string& str)
           else
             tmp += str[i];
         }
-    }  
+    }
 }
 
 void
@@ -100,7 +100,7 @@ ServerConnection::connect(const char* hostname, Uint16 port)
 {
   IPaddress ip;
 
-  if(SDLNet_ResolveHost(&ip, hostname, port) == -1) 
+  if(SDLNet_ResolveHost(&ip, hostname, port) == -1)
     {
       printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
       exit(1);
@@ -134,7 +134,7 @@ ServerConnection::update()
       //most of the time this is a system error, where perror might help you.
       perror("SDLNet_CheckSockets");
     }
-  
+
   if (num > 0)
     {
       if (SDLNet_SocketReady(tcpsock))
@@ -144,13 +144,13 @@ ServerConnection::update()
           char msg[MAXLEN];
 
           result = SDLNet_TCP_Recv(tcpsock, msg, MAXLEN);
-          if(result <= 0) 
+          if(result <= 0)
             {
               // TCP Connection is broken. (because of error or closure)
               SDLNet_TCP_Close(tcpsock);
               exit(1);
             }
-          else 
+          else
             {
               for(int i = 0; i < result; ++i)
                 {
@@ -208,7 +208,7 @@ ServerConnection::process_command(const std::string& cmd)
                   client_state = new ClientState(client_id);
                   client_states[client_id] = client_state;
                 }
-              
+
               if (tokens.size() == 3 && tokens[2] == "stroke_begin")
                 {
                   client_state->stroke_begin();
@@ -269,8 +269,8 @@ ServerConnection::process_command(const std::string& cmd)
                 }
               else if (tokens.size() == 6 && tokens[2] == "set_color")
                 {
-                  client_state->set_color(Color(atoi(tokens[3].c_str()), 
-                                                atoi(tokens[4].c_str()), 
+                  client_state->set_color(Color(atoi(tokens[3].c_str()),
+                                                atoi(tokens[4].c_str()),
                                                 atoi(tokens[5].c_str())));
                 }
               else if (tokens.size() >= 3 && tokens[2] == "message")
@@ -282,14 +282,14 @@ ServerConnection::process_command(const std::string& cmd)
                 }
               else if (tokens.size() == 6 && tokens[2] == "dab")
                 {
-                  client_state->dab(atoi(tokens[3].c_str()), 
+                  client_state->dab(atoi(tokens[3].c_str()),
                                     atoi(tokens[4].c_str()),
                                     atoi(tokens[5].c_str()),
                                     1.0f);
                 }
               else if (tokens.size() == 7 && tokens[2] == "dab")
                 {
-                  client_state->dab(atoi(tokens[3].c_str()), 
+                  client_state->dab(atoi(tokens[3].c_str()),
                                     atoi(tokens[4].c_str()),
                                     atoi(tokens[5].c_str()),
                                     atof(tokens[6].c_str()));
@@ -345,7 +345,7 @@ ServerConnection::send_stroke(const Stroke& stroke, DrawingParameter* param)
 
   std::stringstream str;
   if (param->get_brush().empty())
-    str << "set_generic_brush " 
+    str << "set_generic_brush "
         << param->generic_brush.shape << " "
         << param->generic_brush.radius << " "
         << param->generic_brush.spikes << " "
@@ -355,11 +355,11 @@ ServerConnection::send_stroke(const Stroke& stroke, DrawingParameter* param)
         << std::endl;
   else
     str << "set_brush " << param->get_brush() << std::endl;
-  str << "set_tool " << param->tool << std::endl; 
+  str << "set_tool " << param->tool << std::endl;
   str << "set_opacity " << int(param->opacity) << std::endl;
   str << "set_color "
-      << int(param->color.r) << " " 
-      << int(param->color.g) << " " 
+      << int(param->color.r) << " "
+      << int(param->color.g) << " "
       << int(param->color.b) << std::endl;
   str << "stroke_begin" << std::endl;
   for(Stroke::Dabs::const_iterator i = dabs.begin(); i != dabs.end(); ++i)
@@ -367,7 +367,7 @@ ServerConnection::send_stroke(const Stroke& stroke, DrawingParameter* param)
       str << "dab " << i->time << " " << i->pos.x << " " << i->pos.y << " " << i->pressure << std::endl;
     }
   str << "stroke_end" << std::endl;
-      
+
   send(str.str());
 }
 

@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -21,7 +21,7 @@
 #include "SDL_gfx/SDL_gfxPrimitives.h"
 #include "surface_graphic_context.hpp"
 
-SurfaceGraphicContext::SurfaceGraphicContext(SDL_Surface* target_, 
+SurfaceGraphicContext::SurfaceGraphicContext(SDL_Surface* target_,
                                              const Rect&  region_)
   : target(target_),
     region(region_),
@@ -38,7 +38,7 @@ void
 SurfaceGraphicContext::fill_rect(const Rect& rect, const Color& color)
 {
   boxRGBA(target,
-          rect.left  + region.left, rect.top    + region.top, 
+          rect.left  + region.left, rect.top    + region.top,
           rect.right + region.left, rect.bottom + region.top,
           color.r, color.g, color.b, color.a);
 }
@@ -47,17 +47,17 @@ void
 SurfaceGraphicContext::draw_rect(const Rect& rect, const Color& color)
 {
   boxRGBA(target,
-          rect.left  + region.left, rect.top    + region.top, 
+          rect.left  + region.left, rect.top    + region.top,
           rect.right + region.left, rect.bottom + region.top,
           color.r, color.g, color.b, color.a);
 }
-  
+
 void
 SurfaceGraphicContext::fill_circle(const Point& pos, int radius, const Color& color)
 {
   filledCircleRGBA(target,
                    pos.x + region.left,
-                   pos.y + region.top, 
+                   pos.y + region.top,
                    radius,
                    color.r, color.g, color.b, color.a);
 }
@@ -66,7 +66,7 @@ void
 SurfaceGraphicContext::draw_circle(const Point& pos, int radius, const Color& color)
 {
   circleRGBA(target,
-             pos.x + region.left, pos.y + region.top, 
+             pos.x + region.left, pos.y + region.top,
              radius,
              color.r, color.g, color.b, color.a);
 }
@@ -104,7 +104,7 @@ SurfaceGraphicContext::blit(SDL_Surface* source, const Rect& src_rect, const Poi
   target_rect.x = pos.x + region.left;
   target_rect.y = pos.y + region.top;
 
-  SDL_BlitSurface(source, &source_rect, target, &target_rect);  
+  SDL_BlitSurface(source, &source_rect, target, &target_rect);
 }
 
 /* EOF */

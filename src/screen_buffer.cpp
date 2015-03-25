@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -78,7 +78,7 @@ ScreenBuffer::draw(GraphicContext& gc)
   dirty_region.top    += trans_y;
   dirty_region.right  += trans_x;
   dirty_region.bottom += trans_y;
-  
+
   if (1)
     {
       dirty_region.left   = std::max(get_rect().left,   dirty_region.left);
@@ -92,7 +92,7 @@ ScreenBuffer::draw(GraphicContext& gc)
               << dirty_region.left  << " "
               << dirty_region.top   << " "
               << dirty_region.right << " "
-              << dirty_region.bottom 
+              << dirty_region.bottom
               << std::endl;
 
   // FIXME: Should go elsewhere
@@ -104,16 +104,16 @@ ScreenBuffer::draw(GraphicContext& gc)
       Uint32 black = SDL_MapRGB(target->format, 200, 200, 200);
       Uint32 white = SDL_MapRGB(target->format, 100, 100, 100);
 
-      SDL_Rect r;     
+      SDL_Rect r;
       for(int y = get_rect().top; y < get_rect().bottom; y += 32)
         for(int x = get_rect().left; x < get_rect().right; x += 32)
           {
             r.x = x;
             r.y = y;
-            
+
             r.w = 32;
             r.h = 32;
-            
+
             if (((x / 32) % 2) ^ ((y / 32) % 2))
               SDL_FillRect(target, &r, black);
             else
@@ -128,15 +128,15 @@ ScreenBuffer::draw(GraphicContext& gc)
       draw_ctx->draw(target, dirty_region, trans_x, trans_y);
       if (!complete_refresh)
         stroke_buffer->draw(target, dirty_region, trans_x, trans_y);
-  
+
       if (complete_refresh)
-        { 
+        {
           SDL_Rect r;
           r.x = get_rect().left;
           r.y = get_rect().top;
           r.w = get_rect().get_width();
           r.h = get_rect().get_height();
-            
+
           // FIXME: Dirty
           tools[0]->draw(target, get_rect(), trans_x, trans_y);
 
@@ -144,21 +144,21 @@ ScreenBuffer::draw(GraphicContext& gc)
         }
       else
         {
-          SDL_UpdateRect(target, 
-                         dirty_region.left,        dirty_region.top, 
+          SDL_UpdateRect(target,
+                         dirty_region.left,        dirty_region.top,
                          dirty_region.get_width(), dirty_region.get_height());
         }
     }
-  else 
+  else
     {
       if (complete_refresh)
-        { 
+        {
           SDL_Rect r;
           r.x = get_rect().left;
           r.y = get_rect().top;
           r.w = get_rect().get_width();
           r.h = get_rect().get_height();
-            
+
           // FIXME: Dirty
           tools[0]->draw(target, get_rect(), trans_x, trans_y);
 
@@ -166,7 +166,7 @@ ScreenBuffer::draw(GraphicContext& gc)
         }
     }
 
-  if (0) 
+  if (0)
     std::cout << "Updating done" << std::endl;
 
   complete_refresh = false;
@@ -186,7 +186,7 @@ ScreenBuffer::mark_dirty(int x, int y, int w, int h)
 
   if (y < 0)
     y = 0;
-  
+
   // FIXME: This must be drawable size, not screen size
   if (x + w > draw_ctx->get_width())
     w = draw_ctx->get_width() - x;
@@ -205,7 +205,7 @@ ScreenBuffer::mark_dirty(int x, int y, int w, int h)
 
       dirty_region.left = std::min(x, x1);
       dirty_region.top  = std::min(y, y1);
-      
+
       dirty_region.right  = std::max(x+w, x2);
       dirty_region.bottom = std::max(y+h, y2);
     }
@@ -223,7 +223,7 @@ void
 ScreenBuffer::on_pen_motion(const PenEvent& pen)
 {
   PenEvent new_pen = pen;
-  
+
   new_pen.x -= scroll_offset_x;
   new_pen.y -= scroll_offset_y;
 
@@ -239,7 +239,7 @@ ScreenBuffer::on_mouse_motion(const MouseMotionEvent& motion)
   tool_motion.y = motion.y - scroll_offset_y;
 
   tool_motion.screen = Point(motion.x, motion.y);
-  
+
   for(Tools::iterator i = tools.begin(); i != tools.end(); ++i)
     (*i)->on_motion(tool_motion);
 }
@@ -253,7 +253,7 @@ ScreenBuffer::on_mouse_button(const MouseButtonEvent& button)
 
   tool_button.x = button.x - scroll_offset_x;
   tool_button.y = button.y - scroll_offset_y;
-  
+
   if (button.button >= 1 && button.button <= int(tools.size()))
     {
       if (button.state == SDL_PRESSED)

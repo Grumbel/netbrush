@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -70,7 +70,7 @@ public:
 class AngleCallback : public SliderCallback
 {
 public:
-  void operator()(int v) 
+  void operator()(int v)
   {
     controller->set_generic_brush_angle(v/1000.0f);
   }
@@ -87,17 +87,17 @@ public:
   {
   }
 
-  void on_press  (Button* button) 
+  void on_press  (Button* button)
   {
     //std::cout << "Press: " << button << std::endl;
   }
 
-  void on_release(Button* button) 
+  void on_release(Button* button)
   {
     //std::cout << "Release: " << button << std::endl;
   }
-  
-  void on_click  (Button* button) 
+
+  void on_click  (Button* button)
   {
     //std::cout << "Setting tool: " << tool << std::endl;
     client_draw_param->tool = tool;
@@ -118,8 +118,8 @@ public:
 
   void on_press  (Button* button) {}
   void on_release(Button* button) {}
-  
-  void on_click  (Button* button) 
+
+  void on_click  (Button* button)
   {
     screen_buffer->set_tool(tool);
   }
@@ -128,25 +128,25 @@ public:
 Controller::Controller()
 {
   // Toolbar
-    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-airbrush-22.png"), 
+    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-airbrush-22.png"),
                                    Rect(Point(2, 2+0*34), Size(34, 34)),
                                    new ToolParameterButtonCallback(DrawingParameter::TOOL_AIRBRUSH)));
-    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-paintbrush-22.png"), 
+    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-paintbrush-22.png"),
                                    Rect(Point(2, 2+1*34), Size(34, 34)),
                                    new ToolParameterButtonCallback(DrawingParameter::TOOL_PAINTBRUSH)));
-    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-color-picker-22.png"), 
+    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-color-picker-22.png"),
                                    Rect(Point(2, 2+2*34), Size(34, 34)),
                                    new ToolButtonCallback(COLOR_PICKER_TOOL)));
-    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-rect-22.png"), 
+    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-rect-22.png"),
                                    Rect(Point(2, 2+3*34), Size(34, 34)),
                                    new ToolButtonCallback(RECT_TOOL)));
-    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-circle-22.png"), 
+    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-circle-22.png"),
                                    Rect(Point(2, 2+4*34), Size(34, 34)),
                                    new ToolButtonCallback(CIRCLE_TOOL)));
-    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-line-22.png"), 
+    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-line-22.png"),
                                    Rect(Point(2, 2+5*34), Size(34, 34)),
                                    new ToolButtonCallback(LINE_TOOL)));
-    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-rect-select-22.png"), 
+    widget_manager->add(new Button(IMG_Load(DATADIR "/icons/stock-tool-rect-select-22.png"),
                                    Rect(Point(2, 2+6*34), Size(34, 34)),
                                    new ToolButtonCallback(REGION_TOOL)));
     widget_manager->add(text_view = new TextView(Rect(38, screen->h - 38,
@@ -164,19 +164,19 @@ Controller::Controller()
   widget_manager->add(color_display);
 
   // Brush Slider
-  radius_slider = new SliderWidget(100, 48*1000, 1, 
+  radius_slider = new SliderWidget(100, 48*1000, 1,
                                    Rect(Point(screen->w-128, 128+24+24+128+24*(0)), Size(128, 24)),
                                    new RadiusCallback());
-  
+
   spike_slider = new SliderWidget(2, 20, 1, Rect(Point(screen->w-128, 128+24+24+128+24*(1)), Size(128, 24)),
                                   new SpikeCallback());
-  
+
   hardness_slider = new SliderWidget(0, 1000, 1, Rect(Point(screen->w-128, 128+24+24+128+24*(2)), Size(128, 24)),
                                      new HardnessCallback());
-  
+
   aspect_ratio_slider = new SliderWidget(1 * 1000, 20 * 1000, 1, Rect(Point(screen->w-128, 128+24+24+128+24*(3)), Size(128, 24)),
                                          new AspectRatioCallback());
-  
+
   angle_slider = new SliderWidget(0, 180 * 1000, 1, Rect(Point(screen->w-128, 128+24+24+128+24*(4)), Size(128, 24)),
                                   new AngleCallback());
   widget_manager->add(radius_slider);
@@ -206,12 +206,12 @@ Controller::set_color(const Color& color)
 {
   client_draw_param->color = color;
   color_display->set_color(color);
-  
+
   //alpha_picker->set_color(color);
-  
+
   //saturation_value_picker->set_color(color); // FIXME: Should use hue instead of color
 
-  if (0) 
+  if (0)
     { // FIXME: all buggy
       HSVColor hsv = HSVColor::from_rgb(color);
       saturation_value_picker->set_color(Color::from_hue(hsv.hue));
@@ -245,7 +245,7 @@ Controller::set_generic_brush_shape(BrushShape shape)
 {
   client_draw_param->generic_brush.shape = shape;
   set_generic_brush(client_draw_param->generic_brush);
-  
+
   /*
     radius_slider->set_pos();
   spike_slider->set_pos();;
@@ -297,7 +297,7 @@ Controller::set_generic_brush(const GenericBrush& brush)
   delete client_draw_param->brush_buffer;
   client_draw_param->brush_buffer = brush.generate();
   brush_widget->set_brush(client_draw_param->brush_buffer);
-  
+
   radius_slider->set_pos(int(client_draw_param->generic_brush.radius * 1000));
   spike_slider->set_pos(client_draw_param->generic_brush.spikes);
   hardness_slider->set_pos(int(client_draw_param->generic_brush.hardness * 1000));
@@ -314,7 +314,7 @@ Controller::update_mouse_cursor()
     return ;
 
   GrayscaleBuffer* brush = client_draw_param->brush_buffer;
-  
+
   int w     = brush->get_width();
   int pitch = brush->get_width()/8 + 1;
   int h     = brush->get_height();
@@ -335,16 +335,16 @@ Controller::update_mouse_cursor()
           check = 1;
 
 
-        if ((brush->at(x-1, y) < threshold && 
+        if ((brush->at(x-1, y) < threshold &&
              brush->at(x+1, y) > threshold)
             ||
-            (brush->at(x-1, y) > threshold && 
+            (brush->at(x-1, y) > threshold &&
              brush->at(x+1, y) < threshold)
             ||
-            (brush->at(x, y-1) < threshold && 
+            (brush->at(x, y-1) < threshold &&
              brush->at(x, y+1) > threshold)
             ||
-            (brush->at(x, y-1) > threshold && 
+            (brush->at(x, y-1) > threshold &&
              brush->at(x, y+1) < threshold)
             )
           { // black
@@ -352,7 +352,7 @@ Controller::update_mouse_cursor()
             mask[y * pitch + x/8] |= (0x01 << (7 - (x%8)));
           }
       }
-  
+
   if (w > 7 && h > 7)
     {
       int y = h / 2;
@@ -377,7 +377,7 @@ Controller::update_mouse_cursor()
           data[y * pitch + x/8] ^= (0x01 << (7 - (x%8)));
           mask[y * pitch + x/8] |= (0x01 << (7 - (x%8)));
         }
-      
+
       x = w / 2;
       for(int y = h/2 - 1; y <= h/2 + 1; ++y)
         {
@@ -386,7 +386,7 @@ Controller::update_mouse_cursor()
         }
     }
 
-  SDL_Cursor* cursor = SDL_CreateCursor(data, mask, pitch*8, h, 
+  SDL_Cursor* cursor = SDL_CreateCursor(data, mask, pitch*8, h,
                                         w/2, h/2);
   SDL_SetCursor(cursor);
 

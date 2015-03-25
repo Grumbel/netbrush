@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -31,7 +31,7 @@
 WidgetManager::WidgetManager()
   : grabbed_widget(0), focused_widget(0)
 {
-  
+
 }
 
 WidgetManager::~WidgetManager()
@@ -64,7 +64,7 @@ WidgetManager::on_mouse_motion(const MouseMotionEvent& motion)
   else
     {
       Widget* old_focused_widget = focused_widget;
-      
+
       focused_widget = 0;
 
       for(Widgets::iterator i = widgets.begin(); i != widgets.end(); ++i)
@@ -78,7 +78,7 @@ WidgetManager::on_mouse_motion(const MouseMotionEvent& motion)
 
               if (!grabbed_widget)
                 focused_widget = (*i);
-              
+
               (*i)->on_mouse_motion(trans_motion);
               break;
             }
@@ -90,7 +90,7 @@ WidgetManager::on_mouse_motion(const MouseMotionEvent& motion)
             {
               if (old_focused_widget)
                 old_focused_widget->on_leave();
-         
+
               if (focused_widget)
                 focused_widget->on_enter();
             }
@@ -127,7 +127,7 @@ WidgetManager::on_mouse_button(const MouseButtonEvent& button)
               (*i)->on_mouse_button(trans_button);
               break;
             }
-        }  
+        }
     }
 }
 
@@ -186,14 +186,14 @@ WidgetManager::update()
                           << (*i)->get_rect().left << " " << (*i)->get_rect().top << " "
                           << (*i)->get_rect().get_width() << " " << (*i)->get_rect().get_height() << std::endl;
 
-              SDL_UpdateRect(screen, 
+              SDL_UpdateRect(screen,
                              (*i)->get_rect().left,        (*i)->get_rect().top,
                              (*i)->get_rect().get_width(), (*i)->get_rect().get_height());
             }
 
           (*i)->set_dirty(false);
         }
-    }  
+    }
 }
 
 void

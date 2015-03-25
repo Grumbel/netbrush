@@ -1,26 +1,26 @@
-/** 
+/**
  ** Copyright (c) 2006 Ingo Ruhnke <grumbel@gmx.de>
- ** 
+ **
  ** This software is provided 'as-is', without any express or implied
  ** warranty. In no event will the authors be held liable for any
  ** damages arising from the use of this software.
- ** 
+ **
  ** Permission is granted to anyone to use this software for any
  ** purpose, including commercial applications, and to alter it and
  ** redistribute it freely, subject to the following restrictions:
- ** 
+ **
  **   1. The origin of this software must not be misrepresented; you
  **      must not claim that you wrote the original software. If you
  **      use this software in a product, an acknowledgment in the
  **      product documentation would be appreciated but is not
  **      required.
- ** 
+ **
  **   2. Altered source versions must be plainly marked as such, and
  **      must not be misrepresented as being the original software.
- ** 
+ **
  **   3. This notice may not be removed or altered from any source
  **      distribution.
- ** 
+ **
  */
 
 #include <stdio.h>
@@ -51,7 +51,7 @@ make_message(const char *fmt, va_list ap)
   /* Guess we need no more than 100 bytes. */
   int n, size = 100;
   char *p, *np;
- 
+
   if ((p = malloc (size)) == NULL)
     return NULL;
 
@@ -86,12 +86,12 @@ TTY_CreateFont(SDL_Surface* surface, int glyph_width, int glyph_height, const ch
 
   font->surface = SDL_DisplayFormatAlpha(surface);
 
-  if (!font->surface) 
+  if (!font->surface)
     {
       TTY_SetError("TTY_CreateFont: conversation of surface failed");
       return 0;
     }
-  
+
   memset(font->transtbl, 0, 256);
   for(i = 0; letters[i] != '\0'; ++i)
     font->transtbl[(int)letters[i]] = i;
@@ -236,10 +236,10 @@ TTY_Print(TTY_Font* font, SDL_Surface* screen, int x, int y, Uint32 flags, const
       else
         {
           TTY_GetGlyph(font, str[i], &src_rect);
-  
+
           dst_rect.x = x + x_of;
           dst_rect.y = y + y_of;
-  
+
           SDL_BlitSurface(font->surface, &src_rect, screen, &dst_rect);
 
           x_of += font->glyph_width;
@@ -255,19 +255,19 @@ TTY_Create(int width, int height, TTY_Font* font)
 
   // SDL_Surface* temp = TTY_CreateRGBSurface(font8x12);
   // SDL_Surface* temp = IMG_Load("c64_16x16.png");
-      
-  //tty->font = TTY_CreateFont(temp, 16, 16, 
+
+  //tty->font = TTY_CreateFont(temp, 16, 16,
   //                         "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   //                         "[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
   tty->font = font;
 
   //SDL_FreeSurface(temp);
-  
+
   /* Create Framebuffer */
   tty->framebuffer = (char**)malloc(sizeof(char*) * height);
   for(i = 0; i < height; ++i)
     tty->framebuffer[i] = (char*)malloc(sizeof(char) * width);
-  
+
   tty->width  = width;
   tty->height = height;
 
@@ -279,7 +279,7 @@ TTY_Create(int width, int height, TTY_Font* font)
 
   tty->cursor_x = 0;
   tty->cursor_y = 0;
-  
+
   TTY_Clear(tty);
 
   return tty;
@@ -289,13 +289,13 @@ void
 TTY_Free(TTY* tty)
 {
   int i;
-  
+
   // TTY_FreeFont(tty->font);
 
   for(i = 0; i < tty->height; ++i)
     free(tty->framebuffer[i]);
   free(tty->framebuffer);
-  
+
   free(tty);
 }
 
@@ -324,7 +324,7 @@ void TTY_GetCursor(TTY* tty, int* x, int* y)
 }
 
 void TTY_Clear(TTY* tty)
-{ 
+{
   int y;
   for(y = 0; y < tty->height; ++y)
     memset(tty->framebuffer[y], 0, tty->width);
@@ -354,7 +354,7 @@ void TTY_putchar(TTY* tty, char chr)
       tty->cursor_x = tty->scroll_x;
     }
   else
-    {      
+    {
       tty->framebuffer[tty->cursor_y][tty->cursor_x] = chr;
 
       tty->cursor_x += 1;
@@ -433,7 +433,7 @@ void TTY_Blit(TTY* tty, SDL_Surface* screen, int screen_x, int screen_y)
                 }
             }
           else
-            {          
+            {
               char chr = tty->framebuffer[modulo(y + tty->scroll_y, tty->height)][modulo(x + tty->scroll_x, tty->width)];
               if (chr)
                 {

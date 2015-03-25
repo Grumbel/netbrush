@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -43,7 +43,7 @@ StrokeBuffer::~StrokeBuffer()
 void
 StrokeBuffer::clear(const Rect& rect)
 {
-  buffer->fill_rect(rect, 0);  
+  buffer->fill_rect(rect, 0);
 }
 
 void
@@ -78,7 +78,7 @@ StrokeBuffer::add_dab(const Dab& dab)
 
       Stroke::Dabs::size_type last_dabs_size = interpolater->get_interpolated_dabs().size();
       interpolater->add_dab(dab);
-      
+
       if (last_dabs_size < interpolater->get_interpolated_dabs().size())
         {
           GrayscaleBuffer* blit_brush = brush->scale(dab.pressure, dab.pressure);
@@ -87,8 +87,8 @@ StrokeBuffer::add_dab(const Dab& dab)
           for(Stroke::Dabs::const_iterator i = dabs.begin() + last_dabs_size; i != dabs.end(); ++i)
             {
               buffer->blit(blit_brush,
-                           static_cast<int>(i->pos.x - blit_brush->get_width()/2), 
-                           static_cast<int>(i->pos.y - blit_brush->get_height()/2), 
+                           static_cast<int>(i->pos.x - blit_brush->get_width()/2),
+                           static_cast<int>(i->pos.y - blit_brush->get_height()/2),
                            (Uint8)(255 * dab.pressure),
                            GrayscaleBuffer::ALPHA);
             }
@@ -101,8 +101,8 @@ StrokeBuffer::add_dab(const Dab& dab)
       GrayscaleBuffer* blit_brush = brush->scale(dab.pressure, dab.pressure);
 
       buffer->blit(blit_brush,
-                   static_cast<int>(dab.pos.x - blit_brush->get_width()/2), 
-                   static_cast<int>(dab.pos.y - blit_brush->get_height()/2), 
+                   static_cast<int>(dab.pos.x - blit_brush->get_width()/2),
+                   static_cast<int>(dab.pos.y - blit_brush->get_height()/2),
                    (Uint8)(255 * dab.pressure),
                    GrayscaleBuffer::ALPHA);
 
@@ -123,8 +123,8 @@ StrokeBuffer::draw_stroke(const Stroke& stroke, DrawingParameter* param)
           GrayscaleBuffer* blit_brush = brush->scale(i->pressure, i->pressure);
 
           buffer->blit(blit_brush,
-                       static_cast<int>(i->pos.x - blit_brush->get_width()/2), 
-                       static_cast<int>(i->pos.y - blit_brush->get_height()/2), 
+                       static_cast<int>(i->pos.x - blit_brush->get_width()/2),
+                       static_cast<int>(i->pos.y - blit_brush->get_height()/2),
                        (Uint8)(255 * i->pressure),
                        GrayscaleBuffer::ALPHA);
 
@@ -139,25 +139,25 @@ StrokeBuffer::draw_stroke(const Stroke& stroke, DrawingParameter* param)
           GrayscaleBuffer* blit_brush = brush->scale(i->pressure, i->pressure);
 
           buffer->blit(blit_brush,
-                       static_cast<int>(i->pos.x - blit_brush->get_width()/2), 
+                       static_cast<int>(i->pos.x - blit_brush->get_width()/2),
                        static_cast<int>(i->pos.y - blit_brush->get_height()/2),
-                       (Uint8)(255 * i->pressure), 
+                       (Uint8)(255 * i->pressure),
                        GrayscaleBuffer::ALPHA);
-          
+
           delete blit_brush;
-        }      
+        }
     }
 }
 
 void
 StrokeBuffer::draw(SDL_Surface* target, const Rect& rect, int x_of, int y_of)
-{ 
+{
   // rect is in screenspace, x_of, y_of tell how to go from canvas to screenspace
   SDL_LockSurface(target);
 
   Uint8* dst = static_cast<Uint8*>(target->pixels);
   Uint8* src = buffer->get_data();
-  
+
   assert(rect.left >= 0);
   if (0)
     std::cout << "StrokeBuffer::draw: " << target << " " << rect.left << " " << rect.top << " "

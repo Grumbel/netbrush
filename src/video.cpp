@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -30,7 +30,7 @@ void clip_to(SDL_Rect* rect, SDL_Rect* clip_rect)
   int y1 = std::max(clip_rect->y, rect->y);
 
   int x2 = std::min(clip_rect->x + clip_rect->w, rect->x + rect->w);
-  int y2 = std::min(clip_rect->y + clip_rect->h, rect->y + rect->h);  
+  int y2 = std::min(clip_rect->y + clip_rect->h, rect->y + rect->h);
 
   rect->x = x1;
   rect->y = y1;

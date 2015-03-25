@@ -1,5 +1,5 @@
-/*            _   ___              _   
-**   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
+/*            _   ___              _
+**   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
 **  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
@@ -8,12 +8,12 @@
 **  it under the terms of the GNU General Public License as published by
 **  the Free Software Foundation, either version 3 of the License, or
 **  (at your option) any later version.
-**  
+**
 **  This program is distributed in the hope that it will be useful,
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of
 **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **  GNU General Public License for more details.
-**  
+**
 **  You should have received a copy of the GNU General Public License
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -26,7 +26,7 @@ DabInterpolater::DabInterpolater(float x_spacing_, float y_spacing_)
     y_spacing(y_spacing_),
     overspace(0.0f)
 {
-  
+
 }
 
 const Stroke::Dabs&
@@ -55,14 +55,14 @@ DabInterpolater::add_dab(const Dab& dab)
       Vector dist  = next_dab.pos - prev_dab.pos;
       float length = dist.length();
       int n = 1;
-    
+
       // FIXME: y_spacing isn't taken into account either
       float local_spacing = x_spacing;
 
       while (length + overspace > (local_spacing * n))
         {
           float factor = (local_spacing/length) * n - (overspace/length);
-          
+
           // FIXME: Interpolate tilting, pressure, etc. along the line
           interpolated_dabs.push_back(Dab(prev_dab.pos.x + dist.x * factor,
                                           prev_dab.pos.y + dist.y * factor,
@@ -79,12 +79,12 @@ DabInterpolater::add_dab(const Dab& dab)
 
 Stroke::Stroke()
 {
-  
+
 }
 
 Stroke::~Stroke()
 {
-  
+
 }
 
 Stroke::Dabs
@@ -106,7 +106,7 @@ Stroke::get_interpolated_dabs(float x_spacing, float y_spacing) const
           Vector dist = dabs[j+1].pos - dabs[j].pos;
           float length = sqrt(dist.x * dist.x + dist.y * dist.y);
           int n = 1;
-    
+
           // Spacing is keep relative to the brush size
           // FIXME: This is specific to a Sprite based drawer, might not work for others
           // FIXME: y_spacing isn't taken into account either
@@ -115,7 +115,7 @@ Stroke::get_interpolated_dabs(float x_spacing, float y_spacing) const
           while (length + overspace > (local_spacing * n))
             {
               float factor = (local_spacing/length) * n - (overspace/length);
-          
+
               // FIXME: Interpolate tilting, pressure, etc. along the line
               interpolated_dabs.push_back(Dab(dabs[j].pos.x + dist.x * factor,
                                               dabs[j].pos.y + dist.y * factor,
@@ -138,7 +138,7 @@ Stroke::get_interpolated_dabs(float x_spacing, float y_spacing) const
 const Stroke::Dabs&
 Stroke::get_dabs() const
 {
-  return dabs; 
+  return dabs;
 }
 
 int
@@ -171,7 +171,7 @@ Stroke::add_dab(const Dab& dab)
 const Rect&
 Stroke::get_bounding_rect() const
 {
-  return bounding_rect; 
+  return bounding_rect;
 }
 
 /* EOF */

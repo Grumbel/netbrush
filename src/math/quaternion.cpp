@@ -1,5 +1,5 @@
 //  $Id$
-// 
+//
 //  Windstille - A Jump'n Shoot Game
 //  Copyright (C) 2005 Matthias Braun <matze@braunis.de>
 //
@@ -7,12 +7,12 @@
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
-//  
+//
 //  This program is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -49,7 +49,7 @@ Quaternion::to_matrix() const
   r.matrix[5]  = 1.0f - 2.0f * (x*x + z*z);
   r.matrix[9]  =        2.0f * (y*z - x*w);
   r.matrix[13] = 0.0f;
-  
+
   r.matrix[2]  =        2.0f * (x*z - y*w);
   r.matrix[6]  =        2.0f * (y*z + x*w);
   r.matrix[10] = 1.0f - 2.0f * (x*x + y*y);
@@ -90,7 +90,7 @@ Quaternion::slerp(const Quaternion& o, float t) const
     result.normalize();
     return result;
   }
-  
+
   dot = clamp(dot, -1 ,1); // robustness
   float theta_O = acos(dot);
   float theta = theta_O * t;

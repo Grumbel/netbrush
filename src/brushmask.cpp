@@ -1,5 +1,5 @@
 //  $Id$
-// 
+//
 //  Flexlay - A Generic 2D Game Editor
 //  Copyright (C) 2004 Ingo Ruhnke <grumbel@gmx.de>
 //
@@ -7,17 +7,17 @@
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
-//  
+//
 //  This program is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Most of the code below is taken from Gimp2.2:
-   gimp_brush_generated module Copyright 1998 Jay Cox <jaycox@earthlink.net> 
+   gimp_brush_generated module Copyright 1998 Jay Cox <jaycox@earthlink.net>
  */
 
 #include <iostream>
@@ -244,7 +244,7 @@ GrayscaleBuffer* generate_brushmask(BrushShape shape,
                                     float  angle)         /* in degrees */
 {
   GimpBrushGenerated brush;
-  
+
   brush.mask         = 0;
   brush.shape        = shape;
   brush.radius       = radius;
@@ -262,7 +262,7 @@ GrayscaleBuffer* generate_brushmask(BrushShape shape,
 int main()
 {
   GimpBrushGenerated brush;
-  
+
   brush.mask         = 0;
   brush.shape        = BRUSH_SHAPE_DIAMOND;
   brush.radius       = 512;
@@ -282,7 +282,7 @@ int main()
     std::cout << int(brush.mask->data[i]) << " ";
 
   //temp_buf_free(brush.mask);
-  
+
   std::cout << std::endl;
 
   return 0;
