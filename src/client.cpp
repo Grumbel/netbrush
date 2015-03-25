@@ -30,9 +30,11 @@
 #include "controller.hpp"
 
 #ifdef WIN32
-#include  <io.h>
-#define access _access
-#define F_OK   0
+#  include <io.h>
+#  define access _access
+#  define F_OK   0
+#else
+#  include <unistd.h>
 #endif
 
 SDL_SysWMinfo syswm;

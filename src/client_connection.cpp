@@ -22,6 +22,15 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+
+#ifdef WIN32
+#  include <io.h>
+#  define access _access
+#  define F_OK   0
+#else
+#  include <unistd.h>
+#endif
+
 #include "client_connection.hpp"
 
 extern std::vector<ClientConnection*> clients;
