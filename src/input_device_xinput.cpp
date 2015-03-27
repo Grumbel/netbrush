@@ -84,7 +84,7 @@ InputDevice_XInput::InputDevice_XInput(Display* dpy, Window w, const std::string
 
 InputDevice_XInput::~InputDevice_XInput()
 {
-	
+
 }
 
 void
@@ -138,12 +138,12 @@ InputDevice_XInput::get_info(XDeviceInfo* info)
                   printf("\t\tMin_value is %d\n",   a->min_value);
                   printf("\t\tMax_value is %d\n",   a->max_value);
                   printf ("\t\tResolution is %d\n", a->resolution);
-					
+				
                   axis.push_back(AxisInfo(a->min_value, a->max_value, a->resolution));
                 }
             }
             break;
-		
+	
           default:
             printf ("unknown class\n");
           }
@@ -235,7 +235,7 @@ InputDevice_XInput::register_events(Display		*dpy,
               ProximityOut(device, proximity_out_type, event_list[number]); number++;
             }
             break;
-		
+	
           default:
             fprintf(stderr, "unknown class\n");
             break;
@@ -300,7 +300,7 @@ InputDevice_XInput::on_device_button_event(XDeviceButtonEvent *button)
   if (verbose) printf("button %s %d ", (button->type == button_release_type) ? "release" : "press  ", button->button);
 
   buttons[button->button] = (button->type == button_press_type);
-	
+
   for(int i = 0; i < button->axes_count; ++i)
     {
       if (verbose)  printf("a[%d]=%d ", button->first_axis + i, button->axis_data[i]);
@@ -313,7 +313,7 @@ void
 InputDevice_XInput::on_device_key_event(XDeviceKeyEvent* key)
 {
   if (verbose) printf("key %s %d ", (key->type == key_release_type) ? "release" : "press  ", key->keycode);
-	
+
   for(int i = 0; i < key->axes_count; ++i)
     {
       if (verbose) printf("a[%d]=%d ", key->first_axis + i, key->axis_data[i]);
@@ -392,7 +392,7 @@ void
 InputDevice_XInput::on_proximity_notify_event(XProximityNotifyEvent* prox)
 {
   if (verbose) printf("proximity %s ", (prox->type == proximity_in_type) ? "in " : "out");
-		
+	
   if (prox->type == proximity_in_type)
     proximity = true;
   else

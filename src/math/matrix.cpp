@@ -49,7 +49,7 @@ Matrix::identity()
 	matrix.matrix[5] = 1.0;
 	matrix.matrix[10] = 1.0;
 	matrix.matrix[15] = 1.0;
-	
+
 	return matrix;
 }
 

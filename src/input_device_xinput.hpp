@@ -85,7 +85,7 @@ private:
 private:
   void received_mouse_input(XEvent &event);
   void received_mouse_move(XEvent &event);
-	
+
   std::string name;
 
   struct AxisInfo
@@ -105,10 +105,10 @@ private:
   std::vector<AxisInfo> axis;
 
   bool absolute;
-  int num_keys;	
+  int num_keys;
 
   bool proximity;
-	
+
   Point mouse_pos;
   Time time_at_last_press;
   int last_press_id;

@@ -113,7 +113,7 @@ public:
 	//: Adds extra documentation to the help output, should only be
 	//: used at the beginning or at the end, to
 	void add_doc(const std::string& doc);
-	
+
 	//: Starts a new group of options, the grouptopic gets printed
 	//: above the group of options in the print_help() output
 	void add_group(const std::string& grouptopic);
@@ -137,7 +137,7 @@ public:
 		const std::string& argument,
 		const std::string& help,
 		bool visible = true);
-	
+
 	//: Parse the options arcording to the options added with
 	//: add_option(), result of the parsing is accessible via
 	//: next() and get_key()/get_argument()

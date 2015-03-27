@@ -75,7 +75,7 @@ public:
 	{
 		//Move the hotspot to 0,0
 		Point r(x - hotspot.x, y - hotspot.y);
-		
+	
 		//Do some Grumbel voodoo.
 
 		// Because MSVC sucks ass wrt standards compliance, it gets it own special function calls
@@ -104,7 +104,7 @@ public:
     	return int(std::sqrt(double((x-p.x)*(x-p.x) + (y-p.y)*(y-p.y))) + 0.5f);
 		#endif
 	}
-	
+
 	//: Translate point.
 	Point &operator+=(const Point &p)
 	{ x += p.x; y += p.y; return *this; }
@@ -112,7 +112,7 @@ public:
 	//: Translate point negatively.
 	Point &operator-=(const Point &p)
 	{ x -= p.x; y -= p.y; return *this; }
-	
+
 	//: Point + Point operator.
 	Point operator+(const Point &p) const
 	{ return Point(x + p.x, y + p.y); }
