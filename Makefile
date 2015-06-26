@@ -2,7 +2,7 @@
 ##   _ _  ___| |_| _ )_ _ _  _ _ _| |_ 
 ##  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 ##  |_||_\___|\__|___/_|  \_,_/__/|_|_|
-##  netBrush - Copyright (C) 2010 Ingo Ruhnke <grumbel@gmx.de>
+##  netBrush - Copyright (C) 2010 Ingo Ruhnke <grumbel@gmail.com>
 ##
 ##  This program is free software: you can redistribute it and/or modify
 ##  it under the terms of the GNU General Public License as published by

@@ -2,7 +2,7 @@
 **   _ _  ___| |_| _ )_ _ _  _ _ _| |_
 **  | ' \/ -_)  _| _ \ '_| || (_-<|   |
 **  |_||_\___|\__|___/_|  \_,_/__/|_|_|
-**  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>
+**  netBrush - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmail.com>
 **
 **  This program is free software: you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -192,7 +192,7 @@ Controller::Controller()
                  " _ _  ___| |_| _ )_ _ _  _ _ _| |_\n"
                  "| ' \\/ -_)  _| _ \\ '_| || (_-<|   |\n"
                  "|_||_\\___|\\__|___/_|  \\_,_/__/|_|_|\n"
-                 "netBrush 0.1.0 - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmx.de>\n");
+                 "netBrush 0.1.0 - Copyright (C) 2006 Ingo Ruhnke <grumbel@gmail.com>\n");
 
   set_generic_brush(client_draw_param->generic_brush);
 
