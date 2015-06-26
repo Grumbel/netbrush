@@ -40,7 +40,7 @@ public:
   Scrollbar(int min, int max, int page_step, Orientation orientation, const Rect& rect);
 
   void on_mouse_motion(const MouseMotionEvent& motion);
-  void on_mouse_button(const MouseButtonEvent& button);;
+  void on_mouse_button(const MouseButtonEvent& button);
 
   void on_enter() {}
   void on_leave() {}

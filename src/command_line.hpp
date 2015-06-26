@@ -152,6 +152,10 @@ public:
 //! Implementation:
 private:
 	CommandLine_Generic* impl;
+
+private:
+  CommandLine(const CommandLine&) = delete;
+  CommandLine& operator=(const CommandLine&) = delete;
 };
 
 #endif

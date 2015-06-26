@@ -30,9 +30,9 @@
 #include "command_line.hpp"
 #include "command_line_generic.hpp"
 
-CommandLine::CommandLine()
+CommandLine::CommandLine() :
+  impl(new CommandLine_Generic())
 {
-	impl = new CommandLine_Generic();
 }
 
 CommandLine::~CommandLine()

@@ -343,12 +343,12 @@ int main(int argc, char** argv)
     widget_manager->add(navigation = new Navigation(Rect(Point(screen->w - 128 - 2, screen->h - 128 - 2),
                                                          Size(128, 128))));
     {
-      SDL_Rect color_rect;
-      color_rect.x = 768;
-      color_rect.y = 100;
+      // SDL_Rect color_rect;
+      // color_rect.x = 768;
+      // color_rect.y = 100;
 
-      color_rect.w = 128;
-      color_rect.h = 128;
+      // color_rect.w = 128;
+      // color_rect.h = 128;
 
       //widget_manager->add(new ColorSelector(&color_rect));
     }
