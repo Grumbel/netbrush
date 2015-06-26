@@ -20,11 +20,22 @@
 cmake_minimum_required(VERSION 3.0)
 project(netbrush VERSION 0.2.4)
 
-include(FindX11)
-include(FindPNG)
-include(FindSDL)
-include(FindSDL_image)
-include(FindSDL_net)
+set(WARNINGS 0 CACHE BOOL "Switch on extra warnings")
+
+if(WARNINGS)
+  set(WARNINGS_CXX_FLAGS
+    -pedantic -Wall -Wextra -Wno-c++0x-compat -Wnon-virtual-dtor
+    -Werror -Wcast-qual -Winit-self -Wno-unused-parameter
+    # -Weffc++ -Wshadow -Wconversion
+    )
+  # -Winline -Wfloat-equal -Wunreachable-code
+endif()
+
+find_package(X11)
+find_package(PNG)
+find_package(SDL)
+find_package(SDL_image)
+find_package(SDL_net)
 
 set(NETBRUSH_BINDIR "${CMAKE_INSTALL_PREFIX}/bin" CACHE PATH "Install location for binaries")
 set(NETBRUSH_DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}" CACHE PATH "Install location for datafiles")
@@ -85,17 +96,21 @@ file(GLOB NETBRUSH_CLIENT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   src/SDL_gfx/SDL_gfxPrimitives.c
   src/input_device_xinput.cpp)
 
+add_compile_options(-std=c++11)
 add_definitions(-DDATADIR="${NETBRUSH_DATADIR}")
 include_directories(src/)
 
 add_library(netbrush-common STATIC ${NETBRUSH_COMMON_SOURCES})
+target_compile_options(netbrush-common PRIVATE ${WARNINGS_CXX_FLAGS})
 target_include_directories(netbrush-common SYSTEM PUBLIC ${SDL_INCLUDE_DIR} ${SDL_NET_INCLUDE_DIRS})
 
 add_executable(netbrush-server ${NETBRUSH_SERVER_SOURCES})
+target_compile_options(netbrush-server PRIVATE ${WARNINGS_CXX_FLAGS})
 target_include_directories(netbrush-server SYSTEM PUBLIC ${SDL_INCLUDE_DIR} ${SDL_NET_INCLUDE_DIRS})
 target_link_libraries(netbrush-server netbrush-common ${SDL_LIBRARY} ${SDL_NET_LIBRARIES})
 
 add_executable(netbrush-client ${NETBRUSH_CLIENT_SOURCES})
+target_compile_options(netbrush-client PRIVATE ${WARNINGS_CXX_FLAGS})
 target_compile_definitions(netbrush-client PUBLIC ${PNG_DEFINITIONS})
 target_include_directories(netbrush-client SYSTEM PUBLIC
   ${SDL_INCLUDE_DIR} ${SDL_IMAGE_INCLUDE_DIRS} ${SDL_NET_INCLUDE_DIRS}
